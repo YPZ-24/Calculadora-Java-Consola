@@ -11,43 +11,50 @@ public class App {
 	public static void main(String[] args) {
 		
 		UserInput userInput = new UserInput();
-		OperationMode operationMode = userInput.getModoOperacion(args[0]);
 		
-		if(operationMode.getMode() == OperationMode.ID_PARAMS_MODE){
-			
-			String[] argsOperacion = new String[args.length-1];
-			for(int i = 1; i<args.length; i++) {
-				argsOperacion[i-1] = args[i];
-			}
-			Operacion operacion = userInput.getOperacion(argsOperacion);
-			operationMode.setOperation(operacion);
-			if(operationMode.getOperation().getTipo() != OperationStatus.ERROR.getCode() && operationMode.getOperation().getStatus() != OperationStatus.VALUE_ERROR.getCode()) {
-				double res = operacion.getResultado();
-				UserOutput.printResult(res);	
-			}else {
-				UserOutput.showError();
-			}
-			
-		} else if(operationMode.getMode() == OperationMode.ID_MENU_MODE){
-			
-			Operacion operacion;
-			do {
-				operacion = userInput.getUserOperation();
-				operationMode.setOperation(operacion);
-				if(operationMode.getOperation().getTipo() != OperationStatus.ERROR.getCode() && operationMode.getOperation().getStatus() != OperationStatus.VALUE_ERROR.getCode()) {
-					double res = operacion.getResultado();
-					UserOutput.printResult(res);
-				}else {
-					UserOutput.showError();
+		if(args.length != 0) {
+			OperationMode operationMode = userInput.getModoOperacion(args[0]);
+			if(operationMode.getMode() == OperationMode.ID_PARAMS_MODE){
+				
+				String[] argsOperacion = new String[args.length-1];
+				for(int i = 1; i<args.length; i++) {
+					argsOperacion[i-1] = args[i];
 				}
-				userInput.waitEnter();
-			}while(operacion.getStatus() != 0);
-		
+				if(argsOperacion.length != 0) {
+					Operacion operacion = userInput.getOperacion(argsOperacion);
+					operationMode.setOperation(operacion);
+					if(operationMode.getOperation().getTipo() != OperationStatus.ERROR.getCode() && operationMode.getOperation().getStatus() != OperationStatus.VALUE_ERROR.getCode()) {
+						double res = operacion.getResultado();
+						UserOutput.printResult(res);	
+					}else {
+						UserOutput.showError();
+					}
+				}else {
+					UserOutput.showErrorMode();
+				}
+				
+			} else if(operationMode.getMode() == OperationMode.ID_MENU_MODE){
+				
+				Operacion operacion;
+				do {
+					operacion = userInput.getUserOperation();
+					operationMode.setOperation(operacion);
+					if(operationMode.getOperation().getTipo() != OperationStatus.ERROR.getCode() && operationMode.getOperation().getStatus() != OperationStatus.VALUE_ERROR.getCode()) {
+						double res = operacion.getResultado();
+						UserOutput.printResult(res);
+					}else {
+						UserOutput.showError();
+					}
+					userInput.waitEnter();
+				}while(operacion.getStatus() != 0);
+			
+			}else {
+				UserOutput.showErrorMode();
+			}
 		}else {
 			UserOutput.showErrorMode();
 		}
 		
-		System.exit(0);
 	}
 
 }

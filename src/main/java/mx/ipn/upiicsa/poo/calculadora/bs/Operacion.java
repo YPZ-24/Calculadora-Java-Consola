@@ -3,8 +3,6 @@ package mx.ipn.upiicsa.poo.calculadora.bs;
 import java.util.HashMap;
 import java.util.Map;
 
-import mx.ipn.upiicsa.poo.calculadora.ui.UserOutput;
-
 public class Operacion {
 	
 	private int tipo;
@@ -36,8 +34,6 @@ public class Operacion {
 					this.b = Double.parseDouble(operationParams[2]);
 				}
 				this.status = OperationStatus.SUCCESS.getCode();
-			}else if(operation.equals(UserOutput.EXIT)) {
-				this.status = OperationStatus.EXIT.getCode();
 			}else {
 				this.status = OperationStatus.VALUE_ERROR.getCode();
 			}

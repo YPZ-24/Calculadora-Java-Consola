@@ -3,8 +3,7 @@ package mx.ipn.upiicsa.poo.calculadora.bs;
 public enum OperationStatus {
 	SUCCESS(1, "Exito"), 
 	ERROR(-1, "Error de Operacion"), 
-	VALUE_ERROR(-2, "Error en Valores"),
-	EXIT(0, "Abandonar el Sistema");
+	VALUE_ERROR(-2, "Error en Valores");
 	
 	private int code;
 	private String name;

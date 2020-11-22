@@ -43,16 +43,5 @@ public enum OperationEnum{
 	public int getParams() {
 		return params;
 	}
-	/*
-	public static OperationEnum getOperationByCommand(String command) {
-		OperationEnum operationEnum = null;
-		for(OperationEnum on: OperationEnum.values()) {
-			if(on.getCommand().equals(command)) {
-				operationEnum = on;
-				break;
-			}
-		}
-		return operationEnum;
-	}
-	*/
+	
 }
